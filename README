@@ -1,13 +1,19 @@
 ActsAsHumanName
 ===============
 
-Introduction goes here.
+Adds two methods to your model:
+
+regular_name: "David Christiansen"
+full_name: "Christiansen, David Ray III"
+
+
+The tests don't work yet. I need to figure out how to include shoulda. Also, you can't configure the names of the columns I use yet. They have to be first_name, last_name, middle_name, and suffix.
 
 
 Example
 =======
 
-Example goes here.
+acts_as_human_name
 
 
-Copyright (c) 2010 [name of plugin creator], released under the MIT license
+Copyright (c) 2010 David Christiansen, released under the MIT license
