@@ -1,6 +1,35 @@
 require 'rake'
 require 'rake/testtask'
 require 'rake/rdoctask'
+require 'rake/gempackagetask' 
+
+PKG_FILES = FileList[
+  '[a-zA-Z]*',
+  'generators/**/*',
+  'lib/**/*',
+  'rails/**/*',
+  'tasks/**/*',
+  'test/**/*'
+]
+
+spec = Gem::Specification.new do |s|
+  s.name = "acts_as_human_name"
+  s.version = "0.0.2"
+  s.author = "Dave Christiansen"
+  s.email = "dave@trooptrack.com"
+  s.homepage = "http://trooptrack.com/"
+  s.platform = Gem::Platform::RUBY
+  s.summary = "Easy way to display people's names"
+  s.files = PKG_FILES.to_a
+  s.require_path = "lib"
+  s.has_rdoc = false
+  s.extra_rdoc_files = ["README"]
+end
+
+desc 'Turn this plugin into a gem.'
+Rake::GemPackageTask.new(spec) do |pkg|
+  pkg.gem_spec = spec
+end
 
 desc 'Default: run unit tests.'
 task :default => :test
