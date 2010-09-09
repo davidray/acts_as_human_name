@@ -19,22 +19,20 @@ module ActiveRecord
         #   Example: <tt>acts_as_human_name :last_name => "surname"</tt>
         # HEY!!! This configuration stuff doesn't actually work yet!!!
         def acts_as_human_name(options = {})
+          unless included_modules.include? InstanceMethods
+            include ActiveRecord::Acts::HumanName::InstanceMethods
+
+            def acts_as_human_name_class
+              #{self.name}
+            end
+          end
+
           configuration = { :last_name => "last_name", 
                             :first_name => "first_name", 
                             :middle_name => "middle_name",
                             :suffix => "suffix" }
                             
           configuration.update(options) if options.is_a?(Hash)
-
-          class_eval <<-EOV
-            include ActiveRecord::Acts::HumanName::InstanceMethods
-
-            def acts_as_human_name_class
-              ::#{self.name}
-            end
-
-            
-          EOV
         end
       end
 
